@@ -12,3 +12,8 @@ end
 get '/posts' do
 	erb "Hello World!!!"
 end
+
+post '/newpost' do
+	content=params[:postContent]
+	erb "you typed #{content}"
+end

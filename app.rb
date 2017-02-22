@@ -31,5 +31,9 @@ end
 
 post '/newpost' do
 	content=params[:postContent]
+	if content.length<1
+		@error="Type something, please!"
+		return erb :new
+	end
 	erb "you typed #{content}"
 end

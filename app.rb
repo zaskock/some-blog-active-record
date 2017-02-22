@@ -17,6 +17,11 @@ before do
 	db_init
 end
 
+configure do
+	db_init
+	@db.execute 'CREATE TABLE if not exists "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,"created_date" DATE,"content" TEXT)'
+end
+
 get '/newpost' do
 	erb :new
 end

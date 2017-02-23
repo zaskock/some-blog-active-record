@@ -5,7 +5,8 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 get '/' do
-	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"
+	@results=@db.execute 'select * from posts order by Id desc'
+	erb :index
 end
 
 def db_init

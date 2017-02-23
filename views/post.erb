@@ -1,4 +1,4 @@
-<h3>Post details[<%=@post['id'] %>]:</h3>
+<h3>Post details[<%=@post['id']%>]:</h3>
 <hr>
 <div>
 <p>
@@ -10,4 +10,10 @@
 </br>
 
 <hr>
+<h4>Comments:</h4>
+<form action="/post/<%=@post['id']%>"method="POST">
+	<textarea name="postContent" class="form-control" rows="3" placeholder="Put your comments here"></textarea>
+	</br>
+	<button type="submit" class="btn btn-success">Submit</button>
+</form>
 </div>

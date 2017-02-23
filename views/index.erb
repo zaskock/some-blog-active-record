@@ -1,6 +1,11 @@
 <h2>Recent Posts:</h2>
+<hr>
 <div><% @results.each do |post| %>
 <p><%=post['content']%></p>
-</br><hr>
+</br>
+[Created (UTC): <%=post['created_date']%>]
+</br>
+<a href="/post/<%=post['id']%>">Comments</a>
+<hr>
 <%end%>
 </div>

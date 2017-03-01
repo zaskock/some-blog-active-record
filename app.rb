@@ -27,9 +27,6 @@ end
 get '/newpost' do
 	erb :new
 end
-get '/posts' do
-	erb "Hello World!!!"
-end
 
 post '/newpost' do
 	content=params[:postContent]

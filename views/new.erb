@@ -1,8 +1,12 @@
 <h2>New Post</h2>
 <p>
 <form action="/newpost"method="POST">
-	<textarea name="postContent" class="form-control" rows="7" placeholder="Put your thoughts here"></textarea>
+	<label>Your name:</label>
+	<input name="author" type="text" class="form-control" value="<%=@author%>" placeholder="John Smith">
 	</br>
-	<button type="submit" class="btn btn-success">Submit</button>
+	<label>Your message:</label>
+	<textarea name="postContent" class="form-control" rows="7" placeholder="Put your thoughts here"><%=@content%></textarea>
+	</br>
+	<button type="submit" class="btn btn-success">Post This!</button>
 </form>
 <p>

@@ -20,8 +20,20 @@ end
 
 configure do
 	db_init
-	@db.execute 'CREATE TABLE if not exists "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,"created_date" TIMESTAMP,"content" TEXT)'
-	@db.execute 'CREATE TABLE if not exists "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,"created_date" TIMESTAMP,"content" TEXT, post_id Integer)'
+	@db.execute 'CREATE TABLE if not exists "posts"
+	(
+	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"created_date" TIMESTAMP,
+	"author" TEXT, 
+	"content" TEXT
+	)'
+	@db.execute 'CREATE TABLE if not exists "comments" 
+	(
+	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"created_date" TIMESTAMP,
+	"content" TEXT,
+	post_id Integer
+	)'
 end
 
 get '/newpost' do
@@ -29,12 +41,19 @@ get '/newpost' do
 end
 
 post '/newpost' do
-	content=params[:postContent]
-	if content.length<1
+	@content=params[:postContent]
+	@author=params[:author]
+
+	if @author.length<1
+		@error="Enter your name, please!"
+		return erb :new
+	end
+	if @content.length<1
 		@error="Type something, please!"
 		return erb :new
 	end
-	@db.execute 'Insert into "posts"(content, created_date) values (?, datetime())', [content]
+
+	@db.execute 'Insert into "posts"(content, author, created_date) values (?, ?, datetime())', [@content, @author]
 	redirect to '/'
 end
 

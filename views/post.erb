@@ -1,31 +1,29 @@
-<h3>Post details[<%=@post['id']%>]:</h3>
+<h3>Post details[<%=@post['id']%>]</h3>
 <hr>
+<b><%=@post['author']%></b> has posted at <%=@post['created_date']%> (UTC):
+</br>
+</br>
 <div>
-<p>
-	<%=@post['content']%>
-</p>
-
-</br>
-<span style="font-size:75%">
-[Created (UTC): <%=@post['created_date']%>]
-</span>
-</br>
-
-<hr>
-<h4>Comments:</h4>
-</br><hr>
-
-<%@comments.each do |comment|%>
-<p><%=comment['content']%></p>
-<span style="font-size:75%">
-[Created (UTC): <%=comment['created_date']%>, Id: <%=comment['id']%>]
-</span>
-
-<hr>
-<%end%>
-<form action="/post/<%=@post['id']%>"method="POST">
-	<textarea name="postContent" class="form-control" rows="3" placeholder="Put your comments here"></textarea>
+	<p>
+		<%=@post['content']%>
+	</p>
 	</br>
-	<button type="submit" class="btn btn-success">Submit</button>
-</form>
+	<hr>
+	<h4>Comments:</h4>
+	</br>
+	<hr>
+	<%@comments.each do |comment|%>
+		<p>
+			<%=comment['content']%>
+		</p>
+		<span style="font-size:75%">
+			[Created (UTC): <%=comment['created_date']%>, Id: <%=comment['id']%>]
+		</span>
+		<hr>
+	<%end%>
+	<form action="/post/<%=@post['id']%>"method="POST">
+		<textarea name="postContent" class="form-control" rows="3" placeholder="Put your comments here"></textarea>
+		</br>
+		<button type="submit" class="btn btn-success">Submit</button>
+	</form>
 </div>

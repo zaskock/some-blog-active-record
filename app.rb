@@ -31,6 +31,7 @@ configure do
 	(
 	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
 	"created_date" TIMESTAMP,
+	"author" TEXT, 
 	"content" TEXT,
 	post_id Integer
 	)'
@@ -62,13 +63,24 @@ get '/post/:post_id' do
 	result=@db.execute 'select * from posts where id=?', [post_id]
 	@comments=@db.execute 'select * from comments where post_id=? order by Id', [post_id]
 	@post=result[0]
+
 	erb :post
 end
+
 post '/post/:post_id' do
 	post_id=params[:post_id]
-	content=params[:postContent]
+	@author=params[:author]
+	@content=params[:postContent]
 	#result=@db.execute 'select * from posts where id=?', [post_id]
 	#@post=result[0]
-	@db.execute 'Insert into "comments"(content, created_date, post_id) values (?, datetime(), ?)', [content, post_id]
+	if @author.length<1
+		#@error="Enter your name, please!"
+		redirect to ('/post/'+post_id)
+	end
+	if @content.length<1
+		#@error="Type something, please!"
+		redirect to ('/post/'+post_id)
+	end
+@db.execute 'Insert into "comments"(author, content, created_date, post_id) values (?, ?, datetime(), ?)', [@author, @content, post_id]
 	redirect to ('/post/'+post_id)
 end

@@ -11,19 +11,28 @@
 	<hr>
 	<h4>Comments:</h4>
 	</br>
-	<hr>
-	<%@comments.each do |comment|%>
-		<p>
-			<%=comment['content']%>
-		</p>
-		<span style="font-size:75%">
-			[Created (UTC): <%=comment['created_date']%>, Id: <%=comment['id']%>]
-		</span>
-		<hr>
-	<%end%>
+	
 	<form action="/post/<%=@post['id']%>"method="POST">
-		<textarea name="postContent" class="form-control" rows="3" placeholder="Put your comments here"></textarea>
+		<input name="author" type="text" class="form-control" value="<%=@author%>" placeholder="John Smith">
+		</br>
+		<textarea name="postContent" class="form-control" rows="3" placeholder="Put your comments here"><%=@content%></textarea>
 		</br>
 		<button type="submit" class="btn btn-success">Submit</button>
 	</form>
+<hr>
+	<%@comments.each do |comment|%>
+		<p>
+			<b>
+				<%=comment['author']%>
+			</b> 
+			has commented at <%=comment['created_date']%> (UTC):
+			</br>
+			</br>
+			<%=comment['content']%>
+		</p>
+		<span style="font-size:75%">
+			Comment Id: <%=comment['id']%>
+		</span>
+		<hr>
+	<%end%>
 </div>

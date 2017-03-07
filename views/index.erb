@@ -1,6 +1,8 @@
 <h2>Recent Posts:</h2><hr>
 <div><% @results.each do |post| %>
-<p><%=post['content']%></p>
+<p style="white-space: pre-wrap;">
+<%=post['content']%>
+</p>
 </br>
 [Created (UTC): <%=post['created_date']%>]
 </br>

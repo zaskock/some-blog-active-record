@@ -4,8 +4,6 @@ Project is based on Sinatra and represents a fairy-tale hybrid of blog and forum
 ####Gems Used:
 - "sinatra"
 - "sqlite3"
-
-####Planning to add support for:
 - "activerecord", "4.1.6"
 - "sinatra-activerecord"
 - "sinatra-contrib"

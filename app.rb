@@ -7,9 +7,13 @@ require 'sinatra/activerecord'
 set :database, "sqlite3:some-blog-a-r.db"
 
 class Post < ActiveRecord::Base
+	validates :author, presence: true, length: {minimum: 3}
+	validates :content, presence: true, length: {minimum: 55}
 end
 
 class Comment < ActiveRecord::Base
+	validates :author, presence: true, length: {minimum: 3}
+	validates :content, presence: true, length: {minimum: 55}
 end
 
 
@@ -18,7 +22,7 @@ get '/' do
 end
 
 def db_init
-	@db= SQLite3::Database.new 'forum.db'
+#@db= SQLite3::Database.new 'forum.db'
 	@db.results_as_hash=true
 end
 
@@ -31,9 +35,7 @@ get '/newpost' do
 	erb :new
 end
 
-post '/newpost' d
-
-o
+post '/newpost' do
 	@content=params[:postContent]
 	@author=params[:author]
 

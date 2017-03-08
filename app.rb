@@ -2,10 +2,18 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
-require 'sqlite3'
+require 'sinatra/activerecord'
+
+set :database, "sqlite3:some-blog-a-r.db"
+
+class Post < ActiveRecord::Base
+end
+
+class Comment < ActiveRecord::Base
+end
+
 
 get '/' do
-	@results=@db.execute 'select * from posts order by Id desc'
 	erb :index
 end
 
@@ -15,26 +23,8 @@ def db_init
 end
 
 before do
-	db_init
-end
-
-configure do
-	db_init
-	@db.execute 'CREATE TABLE if not exists "posts"
-	(
-	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"created_date" TIMESTAMP,
-	"author" TEXT, 
-	"content" TEXT
-	)'
-	@db.execute 'CREATE TABLE if not exists "comments" 
-	(
-	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"created_date" TIMESTAMP,
-	"author" TEXT, 
-	"content" TEXT,
-	post_id Integer
-	)'
+	@posts = Post.all
+	@comments = Comment.all
 end
 
 get '/newpost' do

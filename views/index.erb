@@ -1,6 +1,6 @@
 <%@title="Latest Posts @SomeBlog" %>
 <h2>Recent Posts:</h2><hr>
-<div><% @results.each do |post| %>
+<div><% @posts.each do |post| %>
 <p>
 <b><%=post['author']%></b> has posted at <%=post['created_date']%> (UTC):
 </p>

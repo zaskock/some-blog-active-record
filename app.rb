@@ -31,7 +31,9 @@ get '/newpost' do
 	erb :new
 end
 
-post '/newpost' do
+post '/newpost' d
+
+o
 	@content=params[:postContent]
 	@author=params[:author]
 

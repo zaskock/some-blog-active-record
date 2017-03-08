@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20170308203705) do
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "author"
     t.text     "content"
     t.integer  "post_id"

@@ -27,6 +27,7 @@ def db_init
 end
 
 before do
+	@dataposted=Post.new
 	@posts = Post.all
 	@comments = Comment.all
 end
@@ -36,20 +37,15 @@ get '/newpost' do
 end
 
 post '/newpost' do
-	@content=params[:postContent]
-	@author=params[:author]
+@dataposted=Post.new params[:post]
 
-	if @author.length<1
-		@error="Enter your name, please!"
-		return erb :new
-	end
-	if @content.length<1
-		@error="Type something, please!"
-		return erb :new
+	if @dataposted.save
+		redirect to '/'
+	else
+		@error = "An error occurred, the record has not been saved to database! </br>Details: "+@dataposted.errors.full_messages.first
+		erb :new
 	end
 
-	@db.execute 'Insert into "posts"(content, author, created_date) values (?, ?, datetime())', [@content, @author]
-	redirect to '/'
 end
 
 get '/post/:post_id' do

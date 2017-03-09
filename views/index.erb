@@ -2,7 +2,7 @@
 <h2>Recent Posts:</h2><hr>
 <div><% @posts.each do |post| %>
 <p>
-<b><%=post['author']%></b> has posted at <%=post['created_date']%> (UTC):
+<b><%=post['author']%></b> <span style="font-size:75%">has posted at <%=post['created_at']%> (UTC):</span>
 </p>
 <p style="white-space: pre-wrap;">
 <%=post['content']%>

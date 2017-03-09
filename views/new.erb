@@ -3,10 +3,10 @@
 <p>
 <form action="/newpost"method="POST">
 	<label>Your name:</label>
-	<input name="author" type="text" class="form-control" value="<%=@author%>" placeholder="John Smith">
+	<input name="post[author]" type="text" class="form-control" value="<%=@dataposted[:author]%>" placeholder="John Smith">
 	</br>
 	<label>Your message:</label>
-	<textarea name="postContent" class="form-control" rows="7" placeholder="Put your thoughts here"><%=@content%></textarea>
+	<textarea name="post[content]" class="form-control" rows="7" placeholder="Put your thoughts here"><%=@dataposted[:content]%></textarea>
 	</br>
 	<button type="submit" class="btn btn-success">Post This!</button>
 </form>

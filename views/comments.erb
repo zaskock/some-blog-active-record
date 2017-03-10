@@ -1,0 +1,26 @@
+<%@title="Latest Comments @SomeBlog" %>
+	<h3>Latest Comments:</h3>
+	</br>
+	<hr>
+<%@comments.each do |comment|%>
+		<p>
+			<b>
+				<%=comment.author%>
+			</b>
+			<span style="font-size:75%">
+				has commented to
+				<b style="font-size:144%">
+					<a href="<%="/post/"+comment.post_id.to_s%>">the <%=@posts[comment.post_id.to_i] ? (@posts[comment.post_id.to_i].author + "'s"): "" %> post</a>:
+				</b>
+			</span>
+			</br>
+			</br>
+			<span style="white-space: pre-wrap;"><%=comment.content%></span>
+		</p>
+		<span style="font-size:75%">
+			Comment Id: <%=comment.id%>
+			</br>Posted at <%=comment.created_at%> (UTC)
+		</span>
+		<hr>
+	<%end%>
+</div>

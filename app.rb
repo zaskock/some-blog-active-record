@@ -7,11 +7,13 @@ require 'sinatra/activerecord'
 set :database, "sqlite3:some-blog-a-r.db"
 
 class Post < ActiveRecord::Base
+	has_many :comments, dependent: :destroy
 	validates :author, presence: true, length: {minimum: 3}
 	validates :content, presence: true, length: {minimum: 55}
 end
 
 class Comment < ActiveRecord::Base
+	belongs_to :post
 	validates :author, presence: true, length: {minimum: 3}
 	validates :content, presence: true, length: {minimum: 19}
 end
@@ -30,6 +32,9 @@ end
 get '/newpost' do
 	erb :new
 end
+get '/comments' do
+	erb :comments
+end
 
 post '/newpost' do
 @dataposted=Post.new params[:post]
@@ -44,9 +49,8 @@ post '/newpost' do
 end
 
 get '/post/:post_id' do
-	postid=params[:post_id]
-	@post= Post.find (postid)
-	@comments= Comment.where(post_id: postid).find_each
+	@post= Post.find (params[:post_id])
+	@comments= @post.comments
 
 	erb :post
 end

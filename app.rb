@@ -25,13 +25,14 @@ end
 before do
 	@dataposted=Post.new
 	@posts = Post.order('created_at DESC')
-	@comments = Comment.all
+#	@comments = Comment.all
 	@comment = Comment.new
 end
 
 get '/newpost' do
 	erb :new
 end
+
 get '/comments' do
 	erb :comments
 end
@@ -58,8 +59,9 @@ end
 post '/post/:post_id' do
 	postid=params[:post_id]
 	@post= Post.find (postid)
+	@comments= @post.comments
 
-@comment=Comment.new params[:comment]
+	@comment=Comment.new params[:comment]
 
 	if @comment.save
 		redirect to ('/post/'+postid)

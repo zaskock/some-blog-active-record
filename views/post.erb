@@ -1,23 +1,23 @@
 <%@title="#{@post['author']} posted @SomeBlog" %>
-<h3>Post details[<%=@post[:id]%>]</h3>
+<h3>Post details[<%=@post.id%>]</h3>
 <hr>
-<b><%=@post[:author]%></b> has posted at <%=@post[:created_at]%> (UTC):
+<b><%=@post.author%></b> has posted at <%=@post.created_at%> (UTC):
 </br>
 </br>
 <div>
 	<p style="white-space: pre-wrap;">
-		<%=@post[:content]%>
+		<%=@post.content%>
 	</p>
 	</br>
 	<hr>
 	<h4>Comments:</h4>
 	</br>
 	
-	<form action="/post/<%=@post[:id]%>"method="POST">
-		<input name="comment[post_id]" type="hidden" class="form-control" value="<%=@post[:id]%>">
-		<input name="comment[author]" type="text" class="form-control" value="<%=@comment[:author]%>" placeholder="John Smith">
+	<form action="/post/<%=@post.id%>"method="POST">
+		<input name="comment[post_id]" type="hidden" class="form-control" value="<%=@post.id%>">
+		<input name="comment[author]" type="text" class="form-control" value="<%=@comment.author%>" placeholder="John Smith">
 		</br>
-		<textarea name="comment[content]" class="form-control" rows="3" placeholder="Put your comments here"><%=@comment[:content]%></textarea>
+		<textarea name="comment[content]" class="form-control" rows="3" placeholder="Put your comments here"><%=@comment.content%></textarea>
 		</br>
 		<button type="submit" class="btn btn-success">Submit</button>
 	</form>
@@ -25,15 +25,15 @@
 	<%@comments.each do |comment|%>
 		<p>
 			<b>
-				<%=comment[:author]%>
+				<%=comment.author%>
 			</b> 
-			<span style="font-size:75%">has commented at <%=comment[:created_at]%> (UTC):</span>
+			<span style="font-size:75%">has commented at <%=comment.created_at%> (UTC):</span>
 			</br>
 			</br>
-			<span style="white-space: pre-wrap;"><%=comment[:content]%></span>
+			<span style="white-space: pre-wrap;"><%=comment.content%></span>
 		</p>
 		<span style="font-size:75%">
-			Comment Id: <%=comment[:id]%>
+			Comment Id: <%=comment.id%>
 		</span>
 		<hr>
 	<%end%>

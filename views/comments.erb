@@ -9,17 +9,20 @@
 			</b>
 			<span style="font-size:75%">
 				has commented to
+				<%if comment.post_id%>
 				<b style="font-size:144%">
-					<a href="<%="/post/"+comment.post_id.to_s%>">the <%=@posts[comment.post_id.to_i] ? (@posts[comment.post_id.to_i].author + "'s"): "" %> post</a>:
+					<a href="<%="/post/"+comment.post_id.to_s %>"> the <%= comment.post.author%>'s post</a>:
 				</b>
+				<%else%>
+				the unknown post:
+				<%end%>
 			</span>
 			</br>
 			</br>
 			<span style="white-space: pre-wrap;"><%=comment.content%></span>
 		</p>
 		<span style="font-size:75%">
-			Comment Id: <%=comment.id%>
-			</br>Posted at <%=comment.created_at%> (UTC)
+			Comment Id: <%=comment.id%>. Posted at <%=comment.created_at%> (UTC)
 		</span>
 		<hr>
 	<%end%>

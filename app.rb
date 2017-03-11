@@ -25,7 +25,7 @@ end
 before do
 	@dataposted=Post.new
 	@posts = Post.order('created_at DESC')
-#	@comments = Comment.all
+#	
 	@comment = Comment.new
 end
 
@@ -34,6 +34,7 @@ get '/newpost' do
 end
 
 get '/comments' do
+	@comments = Comment.order('created_at DESC')
 	erb :comments
 end
 
